@@ -1,5 +1,7 @@
 ﻿using DataAccess.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Encodings.Web;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -16,12 +18,15 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize()]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken()]
         public IActionResult Create(BookViewModel book)
         { 
             if(ModelState.IsValid)
@@ -30,9 +35,8 @@ namespace WebApplication1.Controllers
                     new Domain.Models.Book()
                     {
                         Isbn = book.Isbn,
-                        Name = book.Name,
-                        Path = book.Path
-                         ,
+                        Name = HtmlEncoder.Default.Encode(book.Name),
+                        Path = book.Path,
                         Year = book.Year
                     }
 
