@@ -1,4 +1,5 @@
 using DataAccess.Context;
+using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
@@ -14,7 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<LibraryContext>();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<BooksRepository>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -28,6 +29,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 5; //Mc@st12345
     options.Password.RequireUppercase = true;
+    
 });
 
 
