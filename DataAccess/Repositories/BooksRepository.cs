@@ -23,6 +23,11 @@ namespace DataAccess.Repositories
             _context.SaveChanges();
         }
 
-        
+        public void Reserve(Reservation r) 
+        {
+            _context.Reservations.Add(r);
+            _context.SaveChanges();
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace DataAccess.Context
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
 
     }
 }

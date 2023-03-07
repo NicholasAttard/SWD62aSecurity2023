@@ -1,8 +1,11 @@
 ﻿using DataAccess.Repositories;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Permissions;
 using System.Text.Encodings.Web;
 using WebApplication1.Models;
+using WebApplication1.Validators;
 
 namespace WebApplication1.Controllers
 {
@@ -27,6 +30,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken()]
+        [ServiceFilter(typeof(PermissionsActionFilter))]
         public IActionResult Create(BookViewModel book)
         { 
             if(ModelState.IsValid)
